@@ -4,6 +4,7 @@ import colorama
 from label import parse_labels
 from trelloutil import format_due_date, backlog_board, parse_new_due_date
 from worklist import sort_list
+from conf import *
 
 def card_by_id(card_id_postfix, board):
     """Retrieve a card by the last 3 digits of its id"""
@@ -46,7 +47,7 @@ def arg_move(cli_args):
     board = backlog_board()
 
     try:
-        destination_list = [_ for _ in board.list_lists() if _.name == cli_args.list_name][0]
+        destination_list = [_ for _ in board.list_lists() if (_.name == cli_args.list_name or _.name == LIST_MAPPINGS[cli_args.list_name])][0]
     except IndexError:
         print(f'{colorama.Fore.RED}Destination list not found')
         return
@@ -73,7 +74,7 @@ def arg_add(cli_args):
     try:
         destination_list = [
             _ for _ in backlog_board().list_lists()
-            if _.name == cli_args.list_name
+            if (_.name == cli_args.list_name or _.name == LIST_MAPPINGS[cli_args.list_name])
         ][0]
     except IndexError:
         print(f'{colorama.Fore.RED}Error searching for list')
