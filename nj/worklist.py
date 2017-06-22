@@ -4,11 +4,12 @@ import pytz
 import colorama
 from trelloutil import backlog_board, format_due_date, CARD_ID_POSTFIX_COUNT
 from label import label_name_with_color
+from conf import *
 
 def display_active_lists():
     """Display all active lists"""
 
-    active_lists = ['doing', 'blocked', 'need_to_do']
+    active_lists = ACTIVE_LISTS
 
     for active_list in active_lists:
         print(f'{colorama.Style.BRIGHT}{colorama.Fore.YELLOW}{active_list}')
@@ -65,5 +66,5 @@ def arg_sort(cli_args):
     board = backlog_board()
 
     for trello_list in board.list_lists():
-        if trello_list.name != 'done':
+        if trello_list.name != DONE_LIST_NAME:
             sort_list(trello_list)

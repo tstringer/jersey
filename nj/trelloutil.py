@@ -6,6 +6,7 @@ import dateutil
 import colorama
 # pylint: disable=no-name-in-module
 from trello import TrelloClient
+from conf import *
 
 CARD_ID_POSTFIX_COUNT = 4
 
@@ -21,7 +22,7 @@ def trello_creds():
 def trello_board_name():
     """Logic function to get the backlog board name or default"""
 
-    return os.getenv('TRELLO_BACKLOG_BOARD') or 'Backlog'
+    return os.getenv('TRELLO_BACKLOG_BOARD') or TRELLO_BACKLOG_BOARD
 
 def backlog_board():
     """Retrieve the backlog board"""
